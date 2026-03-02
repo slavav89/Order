@@ -103,7 +103,7 @@
         <a href="${pageContext.request.contextPath}/logout" class="logout-link">Выход</a>
     </div>
     <h2>Мои заказы</h2>
-    <a href="${pageContext.request.contextPath}/client/orders/new" class="create-link">Создать новый заказ</a>
+    <a href="${pageContext.request.contextPath}/client/orders/new" class="create-link">Создать новый заказ на мебельные щиты</a>
     <c:if test="${empty orders}">
         <p class="no-orders">У вас пока нет заказов.</p>
     </c:if>

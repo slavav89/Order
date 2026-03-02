@@ -111,7 +111,7 @@
         </c:if>
         <a href="${pageContext.request.contextPath}/logout" class="logout-link">Выход</a>
     </div>
-    <h2>Создать новый заказ</h2>
+    <h2>Создать новый заказ на мебельные щиты</h2>
     <form action="${pageContext.request.contextPath}/client/orders" method="post">
         <label for="description">Описание заказа:</label><br/>
         <textarea id="description" name="description" rows="4" cols="50" required></textarea><br/><br/>

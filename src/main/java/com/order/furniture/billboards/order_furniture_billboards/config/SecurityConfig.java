@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 /**
  * Конфигурирует безопасность приложения
@@ -44,8 +47,11 @@ public class SecurityConfig {
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/register").permitAll()
-                        .requestMatchers("/client/orders").permitAll()
-                        .requestMatchers("/seller/**").permitAll()
+                        .requestMatchers("/WEB-INF/jsp/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/client/**").hasAuthority("CLIENT")
+                        .requestMatchers("/seller/**").hasAuthority("SELLER")
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -61,4 +67,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable());
         return http.build();
     }
+
+//    @Bean
+//    public ViewResolver jspViewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/jsp/");
+//        resolver.setSuffix(".jsp");
+//        resolver.setViewClass(JstlView.class);
+//        resolver.setOrder(1);
+//        return resolver;
+//    }
 }
