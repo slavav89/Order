@@ -117,7 +117,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Авторизоваться в системе</h2>
+    <h2>Авторизоваться</h2>
     <form action="${pageContext.request.contextPath}/login" method="post" id="loginForm" novalidate>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required autocomplete="username" />
