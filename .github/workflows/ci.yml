@@ -8,7 +8,7 @@ on:
 
 jobs:
   # ────────────────────────────────────────────────────────
-  # 1️⃣ BUILD (компиляция)
+  # 1️⃣ BUILD
   # ────────────────────────────────────────────────────────
   build:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
         run: mvn -B clean compile
 
   # ────────────────────────────────────────────────────────
-  # 2️⃣ UNIT TESTS (быстрые, без БД)
+  # 2️⃣ UNIT TESTS
   # ────────────────────────────────────────────────────────
   unit-test:
     needs: build
@@ -66,7 +66,7 @@ jobs:
           path: target/surefire-reports/
 
   # ────────────────────────────────────────────────────────
-  # 3️⃣ INTEGRATION TESTS (медленные, с БД)
+  # 3️⃣ INTEGRATION TESTS
   # ────────────────────────────────────────────────────────
   integration-test:
     needs: unit-test
@@ -89,7 +89,8 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: Run integration tests
-        run: mvn -B verify -Dspring.profiles.active=test
+        run: mvn -B failsafe:integration-test -Dspring.profiles.active=test
+
         env:
           SPRING_PROFILES_ACTIVE: test
 
